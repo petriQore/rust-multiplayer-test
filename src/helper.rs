@@ -1,11 +1,15 @@
 
 use serde_derive::{Deserialize, Serialize};
 use macroquad::prelude::*;
+use std::collections::HashMap;
+use std::net::SocketAddr;
+
 
 #[derive(Serialize, Deserialize)]
 pub enum NetworkMessage {
     Hello,
     Rect(MyRectangle),
+    Players(HashMap<SocketAddr, MyRectangle>),
 }
 
 #[derive(serde_derive::Serialize, serde_derive::Deserialize, Clone, Copy)]
@@ -27,6 +31,24 @@ impl MyRectangle{
             self.clr.3 as f32 / 255.0,
         ));
         }
+
+    pub fn custom_draw_text(&self, port: String) -> () {
+        draw_text(
+            &[self.x.to_string(), ",".to_string(), self.y.to_string()].concat(),
+            self.x,
+            self.y,
+            30.0,
+            WHITE,
+        );
+
+        draw_text(
+            &port,
+            self.x + self.w / 2.0 - measure_text(&port, None, 24, 1.0).width / 2.0,
+            self.y + (self.h / 2.0) - measure_text(&port, None, 24, 1.0).height / 4.0,
+            24.0,
+            WHITE,
+        );
+    }    
     }    
 
     
