@@ -13,7 +13,7 @@ use macroquad::prelude::*;
 
 
 mod helper;
-use helper::MyRectangle;
+use helper::{MyRectangle, NetworkMessage};
 
 const SPEED: f32 = 5.0; 
 
@@ -35,25 +35,10 @@ async fn main() {
 
     let mut client = Socket::bind("0.0.0.0:0").unwrap();
 
-    // client.send(Packet::unreliable(
-    //     server_address(),
-    //     serialize("test")
-    //     .unwrap(),
-    // ));
-
-    // client.send(Packet::unreliable(
-    //     server_address(),
-    //     serialize("hey")
-    //     .unwrap(),
-    // ));
-
-    // client.send(Packet::unreliable(
-    //     server_address(),
-    //     serialize("test")
-    //     .unwrap(),
-    // ));
-
-    // client.manual_poll(Instant::now());
+    let _ = client.send(Packet::reliable_unordered(
+        server_address(),
+        serialize(&NetworkMessage::Hello).unwrap(),
+    ));
 
     let mut rect = MyRectangle {
         x: 50.0,
@@ -84,13 +69,15 @@ async fn main() {
         
         let _ = client.send(Packet::unreliable(
             server_address(),
-            serialize(&rect)
+            serialize(&NetworkMessage::Rect(rect))
             .unwrap(),
         ));
 
     client.manual_poll(Instant::now());
     thread::sleep(Duration::from_millis(16));
+        
 
+        
     }
 
 }

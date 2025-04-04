@@ -2,7 +2,13 @@
 use serde_derive::{Deserialize, Serialize};
 use macroquad::prelude::*;
 
-#[derive(serde_derive::Serialize, serde_derive::Deserialize)]
+#[derive(Serialize, Deserialize)]
+pub enum NetworkMessage {
+    Hello,
+    Rect(MyRectangle),
+}
+
+#[derive(serde_derive::Serialize, serde_derive::Deserialize, Clone, Copy)]
 pub struct MyRectangle {
     pub x: f32,
     pub y: f32, 
@@ -22,3 +28,5 @@ impl MyRectangle{
         ));
         }
     }    
+
+    
