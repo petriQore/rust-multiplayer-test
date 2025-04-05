@@ -17,7 +17,7 @@ use helper::{MyRectangle, NetworkMessage};
 
 const SPEED: f32 = 5.0;
 
-const SERVER_ADDR: &str = "192.168.1.16:12345";
+const SERVER_ADDR: &str = "128.85.43.221:12345";
 
 // fn client_address() -> SocketAddr {
 //     CLIENT_ADDR.parse().unwrap()

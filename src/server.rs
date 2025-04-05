@@ -13,7 +13,7 @@ mod helper;
 use helper::*;
 use macroquad::conf;
 
-const SERVER_ADDR: &str = "192.168.1.16:12345";
+const SERVER_ADDR: &str = "0.0.0.0:12345";
 
 fn server_address() -> SocketAddr {
     SERVER_ADDR.parse().unwrap()
