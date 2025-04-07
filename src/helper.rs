@@ -42,9 +42,9 @@ impl MyRectangle{
         );
 
         draw_text(
-            &port,
-            self.x + self.w / 2.0 - measure_text(&port, None, 24, 1.0).width / 2.0,
-            self.y + (self.h / 2.0) - measure_text(&port, None, 24, 1.0).height / 4.0,
+            &["id:",&port].concat(),
+            self.x + self.w / 2.0 - measure_text(&["id:",&port].concat(), None, 24, 1.0).width / 2.0,
+            self.y + (self.h / 2.0) - measure_text(&["id:",&port].concat(), None, 24, 1.0).height / 4.0,
             24.0,
             WHITE,
         );
